@@ -1,0 +1,6 @@
+services:
+  microservices-plantuml-fullcycle3:
+    container_name: microservices-plantuml-fullcycle3
+    image: plantuml/plantuml-server
+    ports:
+      - "8080:8080"

@@ -1,0 +1,14 @@
+@startuml name
+
+' !include https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Container.puml
+!include https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Context.puml
+' !include C4_Container.puml
+
+
+' Para criar comentários em PlantUML, use aspas simples (') no início da linha.
+' Este é um comentário de exemplo em PlantUML.
+
+System("System", "System name", "System description")
+
+
+@enduml
