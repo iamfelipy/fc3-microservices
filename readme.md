@@ -1,12 +1,14 @@
-como fazer o plantuml preview funcionar?
+metodologia: C4 MODEL  
+projeto: digital wallet full cycle
 
-  baixar a extensão no vscode:
-    PlantUML de jebbs
+ajuste para visualizar PlantUML no VSCode:
 
-  abrir configurações da extensão plantuml
-    definir Plantuml: Render 
-      plantumlserver
-    definir Plantuml: Server
-      http://localhost:8080
+1. Instale a extensão "PlantUML" (jebbs) no VSCode.
 
-  rodar docker-compose
+2. Abra as configurações da extensão PlantUML:
+   - Defina "Plantuml: Render" como `plantumlserver`
+   - Defina "Plantuml: Server" como `http://localhost:8080`
+
+3. Execute `docker-compose up` para iniciar o servidor PlantUML.
+
+4. Abra um arquivo `.puml` e utilize o preview do PlantUML no VSCode.
