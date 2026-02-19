@@ -1,6 +1,21 @@
 services:
-  microservices-plantuml-fullcycle3:
-    container_name: microservices-plantuml-fullcycle3
+  plantuml-c4model:
+    container_name: plantuml-c4model
     image: plantuml/plantuml-server
     ports:
       - "8080:8080"
+    networks:
+      - microservices-net
+  microservice-wallet-core:
+    build: 
+      # context: .
+      dockerfile: ./wallet-core/Dockerfile.dev
+    volumes:
+      - ./:/workspace
+    working_dir: /workspace/wallet-core
+    networks:
+      - microservices-net
+
+networks:
+  microservices-net:
+    driver: bridge
