@@ -3,9 +3,9 @@ package entity
 import (
 	"errors"
 	"time"
+
 	"github.com/google/uuid"
 )
-
 
 type Transaction struct {
 	ID          string
@@ -14,7 +14,6 @@ type Transaction struct {
 	Amount      float64
 	CreatedAt   time.Time
 }
-
 
 func NewTransaction(accountFrom *Account, accountTo *Account, amount float64) (*Transaction, error) {
 	transaction := &Transaction{
@@ -25,7 +24,7 @@ func NewTransaction(accountFrom *Account, accountTo *Account, amount float64) (*
 		CreatedAt:   time.Now(),
 	}
 	err := transaction.Validate()
-	if err := nil {
+	if err != nil {
 		return nil, err
 	}
 	transaction.Commit()
@@ -36,7 +35,6 @@ func (t *Transaction) Commit() {
 	t.AccountFrom.Debit(t.Amount)
 	t.AccountTo.Credit(t.Amount)
 }
-
 
 func (t *Transaction) Validate() error {
 	if t.Amount <= 0 {

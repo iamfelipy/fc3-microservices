@@ -1,3 +1,5 @@
+package entity
+
 import (
 	"testing"
 
@@ -5,9 +7,9 @@ import (
 )
 
 func TestCreateTransaction(t *testing.T) {
-	client1 := NewClient("John Doe", "jd")
+	client1, err := NewClient("John Doe", "jd")
 	account1 := NewAccount(client1)
-	client2 := NewClient("John Doe 2", "jd2")
+	client2, err := NewClient("John Doe 2", "jd2")
 	account2 := NewAccount(client2)
 
 	account1.Credit(1000)
@@ -21,9 +23,9 @@ func TestCreateTransaction(t *testing.T) {
 }
 
 func TestCreateTransactionWithInsufficientBalance(t *testing.T) {
-	client1 := NewClient("John Doe", "jd")
+	client1, err := NewClient("John Doe", "jd")
 	account1 := NewAccount(client1)
-	client2 := NewClient("John Doe 2", "jd2")
+	client2, err := NewClient("John Doe 2", "jd2")
 	account2 := NewAccount(client2)
 
 	account1.Credit(1000)
@@ -31,16 +33,16 @@ func TestCreateTransactionWithInsufficientBalance(t *testing.T) {
 
 	transaction, err := NewTransaction(account1, account2, 2000)
 	assert.NotNil(t, err)
-	asset.Error(t, err, "insufficient funds")
+	assert.Error(t, err, "insufficient funds")
 	assert.Nil(t, transaction)
 	assert.Equal(t, 1000.0, account2.Balance)
 	assert.Equal(t, 1000.0, account1.Balance)
 }
 
 func TestCreateTransactionWithNegativeAmount(t *testing.T) {
-	client1 := NewClient("John Doe", "jd")
+	client1, err := NewClient("John Doe", "jd")
 	account1 := NewAccount(client1)
-	client2 := NewClient("John Doe 2", "jd2")
+	client2, err := NewClient("John Doe 2", "jd2")
 	account2 := NewAccount(client2)
 
 	account1.Credit(1000)
