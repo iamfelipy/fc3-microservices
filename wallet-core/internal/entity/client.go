@@ -11,6 +11,7 @@ type Client struct {
 	ID    string
 	Name  string
 	Email string
+	Accounts []*Account
 	//time.Time é um tipo struct definido no pacote time da biblioteca padrão do Go. Ele representa um valor de data e hora.
 	CreatedAt time.Time
 	UpdatedAt time.Time
@@ -52,5 +53,13 @@ func (c *Client) Update(name string, email string) error {
 	if err != nil {
 		return err
 	}
+	return nil
+}
+
+func (c *Client) AddAccount(account *Account) error {
+	if account.Client.ID != c.ID {
+		return errors.New("account does not belong to client")
+	}
+	c.Accounts = append(c.Accounts, account)
 	return nil
 }
