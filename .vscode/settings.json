@@ -1,4 +1,4 @@
 {
-  "plantuml.server": "http://localhost:8080",
+  "plantuml.server": "http://plantuml-c4model:8080",
   "plantuml.render": "PlantUMLServer"
 }
