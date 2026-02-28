@@ -7,12 +7,22 @@ services:
     networks:
       - microservices-net
   microservice-wallet-core:
+    container_name: microservice-wallet-core
     build: 
       # context: .
       dockerfile: ./wallet-core/Dockerfile.dev
     volumes:
       - ./:/workspace
     working_dir: /workspace/wallet-core
+    networks:
+      - microservices-net
+  utils-package:
+    container_name: utils-package
+    build:
+      dockerfile: ./utils-package/Dockerfile.dev
+    volumes:
+      - ./:/workspace
+    working_dir: /workspace/utils-package
     networks:
       - microservices-net
 

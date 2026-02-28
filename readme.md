@@ -7,8 +7,14 @@ projeto: digital wallet full cycle
 ![C4-Model Contexto](./docs/images/c4-model-context.png)  
 description: context
 
-#### microservices:  
-	- wallet-core  
+#### components:  
+	- microservice: wallet-core  
+		- stack: go  
+		- como instalar tools go?  
+			- ctrl + shift + p  
+			- go: install/update tools  
+			- instalar tudo  
+	- package: utils-package
 		- stack: go  
 		- como instalar tools go?  
 			- ctrl + shift + p  
