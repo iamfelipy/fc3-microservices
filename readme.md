@@ -9,17 +9,21 @@ description: context
 
 #### components:  
 	- microservice: wallet-core  
+		- focado em clientes, contas e transações
 		- stack: go  
 		- como instalar tools go?  
 			- ctrl + shift + p  
 			- go: install/update tools  
 			- instalar tudo  
+	
 	- package: utils-package
+		- contem pacotes que podem ser compartilhados
 		- stack: go  
 		- como instalar tools go?  
 			- ctrl + shift + p  
 			- go: install/update tools  
 			- instalar tudo  
+		
 
 #### ajuste para visualizar PlantUML no VSCode:
 	- metodologia: C4 MODEL  
