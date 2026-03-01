@@ -16,6 +16,18 @@ services:
     working_dir: /workspace/wallet-core
     networks:
       - microservices-net
+  mysql:
+    image: mysql:5.7
+    platform: linux/amd64
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: wallet
+      MYSQL_PASSWORD: root
+    ports:
+      - 3306:3306
+    volumes:
+      - .docker/mysql:/var/lib/mysql
+      
   utils-package:
     container_name: utils-package
     build:
@@ -25,6 +37,7 @@ services:
     working_dir: /workspace/utils-package
     networks:
       - microservices-net
+  
 
 networks:
   microservices-net:
