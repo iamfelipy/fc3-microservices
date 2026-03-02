@@ -1,4 +1,4 @@
-package createaccount
+package create_account
 
 import (
 	"github.com/iamfelipy/fc3-microservices/wallet-core/internal/entity"
