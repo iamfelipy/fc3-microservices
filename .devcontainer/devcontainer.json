@@ -1,10 +1,10 @@
 // For format details, see https://aka.ms/devcontainer.json. For config options, see the
 // README at: https://github.com/devcontainers/templates/tree/main/src/go
 {
-	"name": "utils-package",
+	"name": "wallet-core",
 	// Or use a Dockerfile or Docker Compose file. More info: https://containers.dev/guide/dockerfile
 	//"image": "mcr.microsoft.com/devcontainers/go:1-1.24-bookworm"
-	"dockerComposeFile": "../../docker-compose.yml",
+	"dockerComposeFile": "../.docker/docker-compose.yml",
 
 	// Features to add to the dev container. More info: https://containers.dev/features.
 	// "features": {},
@@ -14,7 +14,7 @@
 
 	// Use 'postCreateCommand' to run commands after the container is created.
 	
-	"service": "utils-package",
+	"service": "fc3-microservice",
   "workspaceFolder": "/workspace",
 	
 	"postCreateCommand": "go version",

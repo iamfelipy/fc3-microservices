@@ -6,14 +6,14 @@ services:
       - "8080:8080"
     networks:
       - microservices-net
-  microservice-wallet-core:
-    container_name: microservice-wallet-core
+  fc3-microservice:
+    container_name: fc3-microservice
     build: 
       # context: .
-      dockerfile: ./wallet-core/Dockerfile.dev
+      dockerfile: ./Dockerfile.dev
     volumes:
-      - ./:/workspace
-    working_dir: /workspace/wallet-core
+      - ../:/workspace
+    working_dir: /workspace
     networks:
       - microservices-net
   mysql:
@@ -26,18 +26,7 @@ services:
     ports:
       - 3306:3306
     volumes:
-      - .docker/mysql:/var/lib/mysql
-      
-  utils-package:
-    container_name: utils-package
-    build:
-      dockerfile: ./utils-package/Dockerfile.dev
-    volumes:
-      - ./:/workspace
-    working_dir: /workspace/utils-package
-    networks:
-      - microservices-net
-  
+      - ./mysql:/var/lib/mysql
 
 networks:
   microservices-net:
