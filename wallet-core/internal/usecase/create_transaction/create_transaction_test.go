@@ -1,9 +1,11 @@
-package createtransaction
+package create_transaction
 
 import (
 	"testing"
 
+	"github.com/iamfelipy/fc3-microservices/pkg/events"
 	"github.com/iamfelipy/fc3-microservices/wallet-core/internal/entity"
+	"github.com/iamfelipy/fc3-microservices/wallet-core/internal/event"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/mock"
 )
@@ -54,12 +56,17 @@ func TestCreateTransactionUseCase_Execute(t *testing.T) {
 		Amount:        100,
 	}
 
-	useCase := &CreateTransactionUseCase{
-		TransactionGateway: mockTransaction,
-		AccountGateway:     mockAccount,
-	}
+	dispatcher := events.NewEventDispatcher()
+	event := event.NewTransactionCreated()
 
-	output, err := useCase.Execute(inputDto)
+	uc := NewCreateTransactionUseCase(
+		mockTransaction,
+		mockAccount,
+		dispatcher,
+		event,
+	)
+
+	output, err := uc.Execute(inputDto)
 	assert.Nil(t, err)
 	assert.NotNil(t, output)
 	assert.NotEmpty(t, output.ID)
