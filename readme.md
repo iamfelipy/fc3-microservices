@@ -16,8 +16,9 @@ description: context
 			- go: install/update tools  
 			- instalar tudo  
 	
-	- package: utils-package
+	- package: pkg
 		- contem pacotes que podem ser compartilhados
+		- traits: event-driven architecture
 		- stack: go  
 		- como instalar tools go?  
 			- ctrl + shift + p  
@@ -50,3 +51,42 @@ description: context
 	- ctrl + shift + p  
 	- escolher a opção "Dev Containers: Reopen in Container" 
 
+#### config mysql for wallet-core
+```bash
+cenario de teste:
+- acessar mysql
+- criar tabelas
+- usar /api/client.http e mudar estado
+- atualizar balance do usuario 1 para 100
+- executar operações com client.http
+- transferir o balance do usuario 1 para o 2
+
+docker ps
+docker exec -it docker-mysql-1 bash
+mysql -uroot -p wallet
+root
+
+CREATE TABLE clients (id VARCHAR(255) PRIMARY KEY, name VARCHAR(255), email VARCHAR(255), created_at date);
+CREATE TABLE accounts (id VARCHAR(255) PRIMARY KEY, client_id VARCHAR(255), balance INT, created_at date);
+CREATE TABLE transactions (id VARCHAR(255) PRIMARY KEY, account_id_from VARCHAR(255), account_id_to VARCHAR(255), amount INT, created_at date);
+select * from clients;
+select * from accounts;
+update accounts set balance=100 where id="6a66b957-543b-474e-8e99-a1bb4b122b55";
+```
+
+### comandos uteis
+```bash
+go run wallet-core/cmd/wallet-core/main.go
+```
+
+### instalar
+	- extension vscode: REST Client
+		- wallet-core/api/client.http
+
+#### executar testes go
+```bash
+// apartir da raiz
+go test ./...
+// apartir de um pacote
+go test ../...
+```
