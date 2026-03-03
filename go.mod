@@ -3,6 +3,8 @@ module github.com/iamfelipy/fc3-microservices
 go 1.24.13
 
 require (
+	github.com/go-chi/chi v1.5.4
+	github.com/go-chi/chi/v5 v5.0.8
 	github.com/go-sql-driver/mysql v1.9.3
 	github.com/google/uuid v1.6.0
 	github.com/mattn/go-sqlite3 v1.14.34

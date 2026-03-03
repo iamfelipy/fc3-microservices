@@ -21,17 +21,17 @@ func (s *AccountDBTestSuite) SetupSuite() {
 	s.Nil(err)
 	s.db = db
 	_, err = s.db.Exec(`CREATE TABLE clients (
-		id VARCHAR(255), 
-		name VARCHAR(255), 
+		id VARCHAR(255),
+		name VARCHAR(255),
 		email VARCHAR(255), 
-		created_at DATE,
+		created_at DATE
 	)`)
 	s.Nil(err)
 	_, err = s.db.Exec(`CREATE TABLE accounts (
 		id VARCHAR(255), 
 		client_id VARCHAR(255), 
-		balance INTEGER, 
-		created_at DATE, 
+		balance INTEGER,
+		created_at DATE
 	)`)
 	s.Nil(err)
 	s.accountDB = NewAccountDB(db)

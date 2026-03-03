@@ -6,7 +6,8 @@ import (
 )
 
 type CreateAccountInputDTO struct {
-	ClientID string
+	// backtick
+	ClientID string `json:"client_id"`
 }
 
 type CreateAccountOutputDTO struct {
