@@ -5,7 +5,7 @@ import (
 	"testing"
 
 	// injeta o sqlite3 no database/sql
-	"github.com/iamfelipy/fc3-microservices/wallet-core/internal/entity"
+	"github.com/iamfelipy/fc3-microservices/internal/entity"
 	_ "github.com/mattn/go-sqlite3"
 	"github.com/stretchr/testify/suite"
 )

@@ -76,7 +76,7 @@ update accounts set balance=100 where id="6a66b957-543b-474e-8e99-a1bb4b122b55";
 
 ### comandos uteis
 ```bash
-go run wallet-core/cmd/wallet-core/main.go
+go run cmd/wallet-core/main.go
 ```
 
 ### instalar

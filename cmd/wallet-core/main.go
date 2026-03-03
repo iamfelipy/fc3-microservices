@@ -5,14 +5,14 @@ import (
 	"fmt"
 
 	_ "github.com/go-sql-driver/mysql"
+	"github.com/iamfelipy/fc3-microservices/internal/database"
+	"github.com/iamfelipy/fc3-microservices/internal/event"
+	"github.com/iamfelipy/fc3-microservices/internal/usecase/create_account"
+	"github.com/iamfelipy/fc3-microservices/internal/usecase/create_client"
+	"github.com/iamfelipy/fc3-microservices/internal/usecase/create_transaction"
+	"github.com/iamfelipy/fc3-microservices/internal/web"
+	"github.com/iamfelipy/fc3-microservices/internal/web/webserver"
 	"github.com/iamfelipy/fc3-microservices/pkg/events"
-	"github.com/iamfelipy/fc3-microservices/wallet-core/internal/database"
-	"github.com/iamfelipy/fc3-microservices/wallet-core/internal/event"
-	"github.com/iamfelipy/fc3-microservices/wallet-core/internal/usecase/create_account"
-	"github.com/iamfelipy/fc3-microservices/wallet-core/internal/usecase/create_client"
-	"github.com/iamfelipy/fc3-microservices/wallet-core/internal/usecase/create_transaction"
-	"github.com/iamfelipy/fc3-microservices/wallet-core/internal/web"
-	"github.com/iamfelipy/fc3-microservices/wallet-core/internal/web/webserver"
 )
 
 func main() {

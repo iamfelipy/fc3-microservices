@@ -1,9 +1,9 @@
 package create_transaction
 
 import (
+	"github.com/iamfelipy/fc3-microservices/internal/entity"
+	"github.com/iamfelipy/fc3-microservices/internal/gateway"
 	"github.com/iamfelipy/fc3-microservices/pkg/events"
-	"github.com/iamfelipy/fc3-microservices/wallet-core/internal/entity"
-	"github.com/iamfelipy/fc3-microservices/wallet-core/internal/gateway"
 )
 
 type CreateTransactionInputDTO struct {

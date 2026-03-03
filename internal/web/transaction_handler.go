@@ -5,7 +5,7 @@ import (
 	"fmt"
 	"net/http"
 
-	"github.com/iamfelipy/fc3-microservices/wallet-core/internal/usecase/create_transaction"
+	"github.com/iamfelipy/fc3-microservices/internal/usecase/create_transaction"
 )
 
 type WebTransactionHandler struct {
