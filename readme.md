@@ -1,29 +1,33 @@
 
-projeto: digital wallet full cycle
+# projeto: digital wallet full cycle
+
+#### objetivo do projeto:  
+colocar o conhecimento de microservices em pratica
+
+#### contextualizando o (dominio):  
+sistema financeiro  
+/GLOSSARY.md tem a linguagem ubiqua 
+
+#### caracteristicas:  
+event-driven architecture, microservices, unit of work, unit test, integration test, transactional atomicity
 
 #### arquitetura: 
-	- c4-model
-	- para visualizar o restante usar o preview plantuml
 ![C4-Model Contexto](./docs/images/c4-model-context.png)  
-description: context
+description: c4-model - context. Para visualizar o restante usar o preview plantuml, na pasta /docs
 
-#### components:  
+#### partes:  
 	- microservice: wallet-core  
 		- focado em clientes, contas e transações
 		- stack: go  
 		- como instalar tools go?  
+			- vscode
 			- ctrl + shift + p  
 			- go: install/update tools  
 			- instalar tudo  
 	
 	- package: pkg
 		- contem pacotes que podem ser compartilhados
-		- traits: event-driven architecture
 		- stack: go  
-		- como instalar tools go?  
-			- ctrl + shift + p  
-			- go: install/update tools  
-			- instalar tudo  
 		
 
 #### ajuste para visualizar PlantUML no VSCode:
@@ -56,6 +60,7 @@ description: context
 cenario de teste:
 - acessar mysql
 - criar tabelas
+- iniciar webservice
 - usar /api/client.http e mudar estado
 - atualizar balance do usuario 1 para 100
 - executar operações com client.http
@@ -69,19 +74,18 @@ root
 CREATE TABLE clients (id VARCHAR(255) PRIMARY KEY, name VARCHAR(255), email VARCHAR(255), created_at date);
 CREATE TABLE accounts (id VARCHAR(255) PRIMARY KEY, client_id VARCHAR(255), balance INT, created_at date);
 CREATE TABLE transactions (id VARCHAR(255) PRIMARY KEY, account_id_from VARCHAR(255), account_id_to VARCHAR(255), amount INT, created_at date);
+
 select * from clients;
 select * from accounts;
+
 update accounts set balance=100 where id="6a66b957-543b-474e-8e99-a1bb4b122b55";
 ```
 
 ### comandos uteis
 ```bash
+// iniciar webservice
 go run cmd/wallet-core/main.go
 ```
-
-### instalar
-	- extension vscode: REST Client
-		- wallet-core/api/client.http
 
 #### executar testes go
 ```bash
@@ -90,3 +94,8 @@ go test ./...
 // apartir de um pacote
 go test ../...
 ```
+
+#### observações
+	- extension vscode: REST Client
+		- usada para testar a api
+		- wallet-core/api/client.http
