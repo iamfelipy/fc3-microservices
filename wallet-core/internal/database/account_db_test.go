@@ -25,7 +25,6 @@ func (s *AccountDBTestSuite) SetupSuite() {
 		name VARCHAR(255), 
 		email VARCHAR(255), 
 		created_at DATE,
-		updated_at DATE
 	)`)
 	s.Nil(err)
 	_, err = s.db.Exec(`CREATE TABLE accounts (
@@ -33,7 +32,6 @@ func (s *AccountDBTestSuite) SetupSuite() {
 		client_id VARCHAR(255), 
 		balance INTEGER, 
 		created_at DATE, 
-		updated_at DATE
 	)`)
 	s.Nil(err)
 	s.accountDB = NewAccountDB(db)

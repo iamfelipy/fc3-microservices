@@ -38,8 +38,7 @@ func (s *TransactionDBTestSuite) SetupSuite() {
 		id VARCHAR(255) PRIMARY KEY,
 		client_id VARCHAR(255),
 		balance INT,
-		created_at date,
-		updated_at date
+		created_at date
 	);`)
 	s.Nil(err)
 	_, err = db.Exec(`
