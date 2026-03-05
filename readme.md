@@ -59,6 +59,7 @@ description: c4-model - context. Para visualizar o restante usar o preview plant
 ```bash
 cenario de teste:
 - acessar mysql
+	- fora do dev-container
 - criar tabelas
 - iniciar webservice
 - usar /api/client.http e mudar estado
@@ -78,7 +79,11 @@ CREATE TABLE transactions (id VARCHAR(255) PRIMARY KEY, account_id_from VARCHAR(
 select * from clients;
 select * from accounts;
 
-update accounts set balance=100 where id="6a66b957-543b-474e-8e99-a1bb4b122b55";
+DROP TABLE clients;
+DROP TABLE accounts;
+DROP TABLE transactions;
+
+update accounts set balance=100 where id="3f06b755-b302-4a61-a8de-55b9a4dc14a1";
 ```
 
 ### comandos uteis

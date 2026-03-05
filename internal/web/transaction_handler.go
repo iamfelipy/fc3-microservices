@@ -2,7 +2,6 @@ package web
 
 import (
 	"encoding/json"
-	"fmt"
 	"net/http"
 
 	"github.com/iamfelipy/fc3-microservices/internal/usecase/create_transaction"
@@ -29,8 +28,9 @@ func (h *WebTransactionHandler) CreateTransaction(w http.ResponseWriter, r *http
 	ctx := r.Context()
 	output, err := h.CreateTransactionUseCase.Execute(ctx, dto)
 	if err != nil {
-		fmt.Println(err)
-		w.WriteHeader(http.StatusInternalServerError)
+		w.WriteHeader(http.StatusBadRequest)
+		// porque err.Error() retorna uma string e w.Write espera um []byte, então ocorre conversão de string para slice de bytes.
+		w.Write([]byte(err.Error()))
 		return
 	}
 
