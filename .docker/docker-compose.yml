@@ -3,17 +3,19 @@ services:
     container_name: plantuml-c4model
     image: plantuml/plantuml-server
     ports:
-      - "8080:8080"
+      - "8081:8080"
     networks:
       - microservices-net
-  fc3-microservice:
-    container_name: fc3-microservice
+  goapp-wallet-core:
+    container_name: goapp-wallet-core
     build: 
       # context: .
       dockerfile: ./Dockerfile.dev
     volumes:
       - ../:/workspace
     working_dir: /workspace
+    ports:
+      - "8080:8080"
     networks:
       - microservices-net
   mysql:

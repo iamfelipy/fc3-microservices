@@ -14,7 +14,7 @@
 
 	// Use 'postCreateCommand' to run commands after the container is created.
 	
-	"service": "fc3-microservice",
+	"service": "goapp-wallet-core",
   "workspaceFolder": "/workspace",
 	
 	"postCreateCommand": "go version",
