@@ -1,6 +1,9 @@
 package events
 
-import "errors"
+import (
+	"errors"
+	"sync"
+)
 
 var ErrHandlerAlreadyRegistered = errors.New("handler already registered")
 
@@ -16,9 +19,14 @@ func NewEventDispatcher() *EventDispatcher {
 
 func (ev *EventDispatcher) Dispatch(event EventInterface) error {
 	if handlers, ok := ev.handlers[event.GetName()]; ok {
+		// Em Go, WaitGroup sincroniza goroutines mas não torna o método Dispatch assíncrono: ele só retorna após todas as goroutines terminarem. Já em async/await (de outras linguagens), a chamada poderia retornar imediatamente e permitir aguardar depois.
+		wg := &sync.WaitGroup{}
+		// cada handler é executado em uma goroutine
 		for _, handler := range handlers {
-			handler.Handle(event)
+			wg.Add(1)
+			go handler.Handle(event, wg)
 		}
+		wg.Wait()
 	}
 	return nil
 }
@@ -27,7 +35,7 @@ func (ed *EventDispatcher) Register(eventName string, handler EventHandlerInterf
 	if _, ok := ed.handlers[eventName]; ok {
 		for _, h := range ed.handlers[eventName] {
 			if h == handler {
-				// evitar sobrescrever ou efeitos duplicados
+				// evita sobrescrever ou efeitos duplicados
 				return ErrHandlerAlreadyRegistered
 			}
 		}
