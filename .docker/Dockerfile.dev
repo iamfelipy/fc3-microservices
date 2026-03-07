@@ -20,6 +20,9 @@ FROM golang:1.24-bookworm
 
 RUN apt-get update && apt-get install -y make curl git
 
+RUN apt-get update && apt-get install -y librdkafka-dev
+
 
 # Set default command to bash, you may want to change this
+# criar um processo que fica ativo, para manter o container de pe
 CMD [ "tail", "-f", "/dev/null" ]
