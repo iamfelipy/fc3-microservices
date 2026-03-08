@@ -59,18 +59,20 @@ func TestCreateTransactionUseCase_Execute(t *testing.T) {
 
 	inputDto := CreateTransactionInputDTO{
 		AccountIDFrom: account1.ID,
-		AccountIDTO:   account2.ID,
+		AccountIDTo:   account2.ID,
 		Amount:        100,
 	}
 
 	dispatcher := events.NewEventDispatcher()
-	event := event.NewTransactionCreated()
+	transactionEvent := event.NewTransactionCreated()
+	balanceEvent := event.NewBalanceUpdated()
 	ctx := context.Background()
 
 	uc := NewCreateTransactionUseCase(
 		mockUow,
 		dispatcher,
-		event,
+		transactionEvent,
+		balanceEvent,
 	)
 
 	output, err := uc.Execute(ctx, inputDto)
