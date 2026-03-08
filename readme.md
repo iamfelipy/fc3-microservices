@@ -1,17 +1,16 @@
 
 # projeto: digital wallet full cycle
 
-#### objetivo do projeto:  
-colocar o conhecimento de microservices em pratica
+### objetivo do projeto:
+criar um microserviço(serviço especifico) e disparar eventos para o kafka
 
-#### contextualizando o (dominio):  
-sistema financeiro  
-/GLOSSARY.md tem a linguagem ubiqua 
+### caracteristicas:  
+event-driven architecture, microservice, unit of work, messaging, kafka, asynchronous communication, unit test, integration test, transactional atomicity
 
-#### caracteristicas:  
-event-driven architecture, microservices, unit of work, messaging, kafka, unit test, integration test, transactional atomicity
+### arquitetura: 
 
-#### arquitetura: 
+- não foi implementando todos os contexts, containers
+
 ![C4-Model Contexto](./docs/images/c4-model-context.png)  
 description: c4-model - context. Para visualizar o restante usar o preview plantuml, na pasta /docs
 ![C4-Model Containers](./docs/images/c4-model-containers.png)  
@@ -20,15 +19,16 @@ description: c4-model - containers. Para visualizar o restante usar o preview pl
 #### containers:  
 	- microservice: wallet-core  
 		- focado em clientes, contas e transações
+		- sistema financeiro  
+			- /GLOSSARY.md tem a linguagem ubiqua 
 		- stack: go  
 		- package: pkg
 			- contem pacotes que podem ser compartilhados
-		- como instalar tools go?  
-			- vscode
+		- como instalar tools go no vscode?  
+			- instalar a extensão go
 			- ctrl + shift + p  
 			- go: install/update tools  
-			- instalar tudo  
-		
+				- instalar tudo  		
 
 #### ajuste para visualizar PlantUML no VSCode:
 	- metodologia: C4 MODEL  
@@ -43,6 +43,7 @@ description: c4-model - containers. Para visualizar o restante usar o preview pl
 	3. Abra um arquivo `.puml` e utilize o preview do PlantUML no VSCode.
 
 #### como usar o ambiente localmente? 
+	- instalar go, docker
 	- subir ambiente 
 		- docker compose -f docker/docker-compose.yml up 
 	- subir ambiente, apos atualizar docker file 
@@ -80,9 +81,10 @@ go test ../...
 # resumo
 	- ao entrar no dev container, todos os containers vao estar iniciados
 	- configurar mysql acessando fora do dev-container
-	- criar o topico transaction via porta localhost:9092, com partição 1 no control-center-kafka
+	- control-center-kafka, criar topicos
 	- iniciar webservice
 	- usar /api/client.http e mudar estado
+	- verificar no controler-center-kafka se a message foi criada
 
 # mysql
 	docker ps
@@ -104,6 +106,7 @@ go test ../...
 
 # control-center kafka
 	- criar o topico transaction via porta localhost:9092, com partição 1
+	- criar o topico balances via porta localhost:9092, com partição 1
 
 # iniciar webservice
 	go run cmd/wallet-core/main.go
