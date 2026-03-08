@@ -11,14 +11,14 @@ import (
 
 type CreateTransactionInputDTO struct {
 	AccountIDFrom string  `json:"account_id_from"`
-	AccountIDTO   string  `json:"account_id_to"`
+	AccountIDTo   string  `json:"account_id_to"`
 	Amount        float64 `json:"amount"`
 }
 
 type CreateTransactionOutputDTO struct {
 	ID            string
 	AccountIDFrom string  `json:"account_id_from"`
-	AccountIDTO   string  `json:"account_id_to"`
+	AccountIDTo   string  `json:"account_id_to"`
 	Amount        float64 `json:"amount"`
 }
 
@@ -55,7 +55,7 @@ func (uc *CreateTransactionUseCase) Execute(ctx context.Context, input CreateTra
 			return err
 		}
 
-		accountTo, err := accountRepository.FindByID(input.AccountIDTO)
+		accountTo, err := accountRepository.FindByID(input.AccountIDTo)
 		if err != nil {
 			return err
 		}
@@ -81,7 +81,7 @@ func (uc *CreateTransactionUseCase) Execute(ctx context.Context, input CreateTra
 
 		output.ID = transaction.ID
 		output.AccountIDFrom = input.AccountIDFrom
-		output.AccountIDTO = input.AccountIDTO
+		output.AccountIDTo = input.AccountIDTo
 		output.Amount = input.Amount
 
 		return nil
