@@ -1,4 +1,4 @@
-module github.com/iamfelipy/fc3-microservices
+module github.com/iamfelipy/fc3-microservices/walletcore
 
 go 1.24.13
 

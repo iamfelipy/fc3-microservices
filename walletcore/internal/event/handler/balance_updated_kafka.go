@@ -4,8 +4,8 @@ import (
 	"fmt"
 	"sync"
 
-	"github.com/iamfelipy/fc3-microservices/pkg/events"
-	"github.com/iamfelipy/fc3-microservices/pkg/kafka"
+	"github.com/iamfelipy/fc3-microservices/walletcore/pkg/events"
+	"github.com/iamfelipy/fc3-microservices/walletcore/pkg/kafka"
 )
 
 type UpdateBalanceKafkaHandler struct {

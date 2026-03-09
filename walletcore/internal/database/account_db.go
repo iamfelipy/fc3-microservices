@@ -3,7 +3,7 @@ package database
 import (
 	"database/sql"
 
-	"github.com/iamfelipy/fc3-microservices/internal/entity"
+	"github.com/iamfelipy/fc3-microservices/walletcore/internal/entity"
 )
 
 type AccountDB struct {

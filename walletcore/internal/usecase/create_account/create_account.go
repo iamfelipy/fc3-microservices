@@ -1,8 +1,8 @@
 package create_account
 
 import (
-	"github.com/iamfelipy/fc3-microservices/internal/entity"
-	"github.com/iamfelipy/fc3-microservices/internal/gateway"
+	"github.com/iamfelipy/fc3-microservices/walletcore/internal/entity"
+	"github.com/iamfelipy/fc3-microservices/walletcore/internal/gateway"
 )
 
 type CreateAccountInputDTO struct {

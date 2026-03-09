@@ -5,7 +5,7 @@ import (
 	"fmt"
 	"net/http"
 
-	"github.com/iamfelipy/fc3-microservices/internal/usecase/create_client"
+	"github.com/iamfelipy/fc3-microservices/walletcore/internal/usecase/create_client"
 )
 
 type WebClientHandler struct {
