@@ -3,10 +3,10 @@ package create_transaction
 import (
 	"context"
 
-	"github.com/iamfelipy/fc3-microservices/walletcore/internal/entity"
-	"github.com/iamfelipy/fc3-microservices/walletcore/internal/gateway"
-	"github.com/iamfelipy/fc3-microservices/walletcore/pkg/events"
-	"github.com/iamfelipy/fc3-microservices/walletcore/pkg/uow"
+	"github.com/iamfelipy/fc3-microservices/services/walletcore/internal/entity"
+	"github.com/iamfelipy/fc3-microservices/services/walletcore/internal/gateway"
+	"github.com/iamfelipy/fc3-microservices/services/walletcore/pkg/events"
+	"github.com/iamfelipy/fc3-microservices/services/walletcore/pkg/uow"
 )
 
 type CreateTransactionInputDTO struct {

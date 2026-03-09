@@ -6,21 +6,21 @@ import (
 	"fmt"
 
 	_ "github.com/go-sql-driver/mysql"
-	"github.com/iamfelipy/fc3-microservices/walletcore/internal/database"
-	"github.com/iamfelipy/fc3-microservices/walletcore/pkg/uow"
+	"github.com/iamfelipy/fc3-microservices/services/walletcore/internal/database"
+	"github.com/iamfelipy/fc3-microservices/services/walletcore/pkg/uow"
 
-	"github.com/iamfelipy/fc3-microservices/walletcore/internal/usecase/create_account"
-	"github.com/iamfelipy/fc3-microservices/walletcore/internal/usecase/create_client"
-	"github.com/iamfelipy/fc3-microservices/walletcore/internal/usecase/create_transaction"
+	"github.com/iamfelipy/fc3-microservices/services/walletcore/internal/usecase/create_account"
+	"github.com/iamfelipy/fc3-microservices/services/walletcore/internal/usecase/create_client"
+	"github.com/iamfelipy/fc3-microservices/services/walletcore/internal/usecase/create_transaction"
 
-	"github.com/iamfelipy/fc3-microservices/walletcore/internal/web"
-	"github.com/iamfelipy/fc3-microservices/walletcore/internal/web/webserver"
+	"github.com/iamfelipy/fc3-microservices/services/walletcore/internal/web"
+	"github.com/iamfelipy/fc3-microservices/services/walletcore/internal/web/webserver"
 
 	ckafka "github.com/confluentinc/confluent-kafka-go/kafka"
-	"github.com/iamfelipy/fc3-microservices/walletcore/internal/event"
-	"github.com/iamfelipy/fc3-microservices/walletcore/internal/event/handler"
-	"github.com/iamfelipy/fc3-microservices/walletcore/pkg/events"
-	"github.com/iamfelipy/fc3-microservices/walletcore/pkg/kafka"
+	"github.com/iamfelipy/fc3-microservices/services/walletcore/internal/event"
+	"github.com/iamfelipy/fc3-microservices/services/walletcore/internal/event/handler"
+	"github.com/iamfelipy/fc3-microservices/services/walletcore/pkg/events"
+	"github.com/iamfelipy/fc3-microservices/services/walletcore/pkg/kafka"
 )
 
 func main() {

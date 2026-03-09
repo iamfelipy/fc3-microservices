@@ -3,8 +3,8 @@ package create_client
 import (
 	"time"
 
-	"github.com/iamfelipy/fc3-microservices/walletcore/internal/entity"
-	"github.com/iamfelipy/fc3-microservices/walletcore/internal/gateway"
+	"github.com/iamfelipy/fc3-microservices/services/walletcore/internal/entity"
+	"github.com/iamfelipy/fc3-microservices/services/walletcore/internal/gateway"
 )
 
 type CreateClientInputDTO struct {

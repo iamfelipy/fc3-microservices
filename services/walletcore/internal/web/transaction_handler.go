@@ -4,7 +4,7 @@ import (
 	"encoding/json"
 	"net/http"
 
-	"github.com/iamfelipy/fc3-microservices/walletcore/internal/usecase/create_transaction"
+	"github.com/iamfelipy/fc3-microservices/services/walletcore/internal/usecase/create_transaction"
 )
 
 type WebTransactionHandler struct {

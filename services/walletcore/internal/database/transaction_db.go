@@ -3,7 +3,7 @@ package database
 import (
 	"database/sql"
 
-	"github.com/iamfelipy/fc3-microservices/walletcore/internal/entity"
+	"github.com/iamfelipy/fc3-microservices/services/walletcore/internal/entity"
 )
 
 type TransactionDB struct {

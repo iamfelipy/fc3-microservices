@@ -3,7 +3,7 @@ package mocks
 import (
 	"context"
 
-	"github.com/iamfelipy/fc3-microservices/walletcore/pkg/uow"
+	"github.com/iamfelipy/fc3-microservices/services/walletcore/pkg/uow"
 	"github.com/stretchr/testify/mock"
 )
 

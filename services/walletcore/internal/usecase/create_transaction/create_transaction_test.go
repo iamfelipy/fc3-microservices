@@ -4,10 +4,10 @@ import (
 	"context"
 	"testing"
 
-	"github.com/iamfelipy/fc3-microservices/walletcore/internal/entity"
-	"github.com/iamfelipy/fc3-microservices/walletcore/internal/event"
-	"github.com/iamfelipy/fc3-microservices/walletcore/internal/usecase/mocks"
-	"github.com/iamfelipy/fc3-microservices/walletcore/pkg/events"
+	"github.com/iamfelipy/fc3-microservices/services/walletcore/internal/entity"
+	"github.com/iamfelipy/fc3-microservices/services/walletcore/internal/event"
+	"github.com/iamfelipy/fc3-microservices/services/walletcore/internal/usecase/mocks"
+	"github.com/iamfelipy/fc3-microservices/services/walletcore/pkg/events"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/mock"
 )

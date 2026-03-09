@@ -1,6 +1,6 @@
 package gateway
 
-import "github.com/iamfelipy/fc3-microservices/walletcore/internal/entity"
+import "github.com/iamfelipy/fc3-microservices/services/walletcore/internal/entity"
 
 type TransactionGateway interface {
 	Create(transaction *entity.Transaction) error
