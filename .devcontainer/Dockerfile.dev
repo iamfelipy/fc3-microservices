@@ -1,0 +1,42 @@
+# Dockerfile for dev environment with Ubuntu base, Docker CLI + Compose (no Go)
+# Single stage (não multistage) — container de desenvolvimento
+
+FROM ubuntu:22.04
+
+ENV DEBIAN_FRONTEND=noninteractive
+
+# --------------------------
+# Install basic dependencies
+# --------------------------
+RUN apt-get update && apt-get install -y \
+    curl \
+    ca-certificates \
+    make \
+    git \
+    software-properties-common \
+    gcc \
+    librdkafka-dev \
+    build-essential \
+    apt-transport-https \
+    gnupg2 \
+    && rm -rf /var/lib/apt/lists/*
+
+# --------------------------
+# Install Docker CLI + Compose Plugin
+# --------------------------
+RUN mkdir -p /etc/apt/keyrings && \
+    curl -fsSL https://download.docker.com/linux/ubuntu/gpg | gpg --dearmor -o /etc/apt/keyrings/docker.gpg && \
+    echo \
+    "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.gpg] https://download.docker.com/linux/ubuntu $(. /etc/os-release && echo "$VERSION_CODENAME") stable" \
+    | tee /etc/apt/sources.list.d/docker.list > /dev/null && \
+    apt-get update && \
+    apt-get install -y docker-ce-cli docker-compose-plugin && \
+    rm -rf /var/lib/apt/lists/*
+
+# --------------------------
+# Working directory
+# --------------------------
+WORKDIR /workspace
+
+# Processo que mantém o container vivo para dev
+CMD [ "tail", "-f", "/dev/null" ]

@@ -1,11 +1,9 @@
-FROM golang:1.24-bookworm
+FROM node:20
 
 # Instalar dependências extras, ferramentas, etc.
 RUN apt-get update && apt-get install -y \
     git \
     curl
-
-RUN apt-get update && apt-get install -y librdkafka-dev
 
 WORKDIR /workspace
 

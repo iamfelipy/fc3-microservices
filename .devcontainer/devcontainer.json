@@ -1,36 +1,52 @@
 // For format details, see https://aka.ms/devcontainer.json. For config options, see the
 // README at: https://github.com/devcontainers/templates/tree/main/src/go
 {
-	"name": "wallet-core",
-	// Or use a Dockerfile or Docker Compose file. More info: https://containers.dev/guide/dockerfile
-	//"image": "mcr.microsoft.com/devcontainers/go:1-1.24-bookworm"
-	"dockerComposeFile": "../.docker/docker-compose.yml",
+	"name": "fc3-microservices",
 
-	// Features to add to the dev container. More info: https://containers.dev/features.
-	// "features": {},
+	"build": {
+		"dockerfile": "Dockerfile.dev",
+		"context": ".."
+	},
 
-	// Use 'forwardPorts' to make a list of ports inside the container available locally.
-	// "forwardPorts": [],
+	"workspaceMount": "source=${localWorkspaceFolder},target=/workspace,type=bind,consistency=cached",
+	"workspaceFolder": "/workspace",
 
-	// Use 'postCreateCommand' to run commands after the container is created.
-	
-	"service": "goapp-wallet-core",
-  "workspaceFolder": "/workspace",
-	
-	"postCreateCommand": "go version",
+	"postCreateCommand": "docker compose version",
 
-	// Configure tool-specific properties.
 	"customizations": {
 		"vscode": {
 			"extensions": [
 				"golang.go",
-				"humao.rest-client"
+				"humao.rest-client",
+				"esbenp.prettier-vscode",
+				"Prisma.prisma",
+				"jebbs.plantuml",
+				"dbaeumer.vscode-eslint"
 			]
 		}
 	},
 
-	"shutdownAction": "stopCompose"
+	"mounts": [
+		"source=/var/run/docker.sock,target=/var/run/docker.sock,type=bind"
+	]
+
+	// Expondo manualmente as portas principais dos serviços para seu devcontainer.
+	// "forwardPorts": [
+	// 	8080,      // walletcore app
+	// 	3003,      // balance nodejs app
+	// 	8081,      // plantuml server
+	// 	3306,      // mysql
+	// 	5432,      // postgresql
+	// 	2181,      // zookeeper
+	// 	9092,      // kafka
+	// 	9021       // control center
+	// ]
 
 	// Uncomment to connect as root instead. More info: https://aka.ms/dev-containers-non-root.
 	// "remoteUser": "root"
+
+	// Para usar com docker-compose diretamente:
+	// "dockerComposeFile": "../docker-compose.yml",
+	// "service": "goapp-walletcore",
+	// "shutdownAction": "stopCompose"
 }

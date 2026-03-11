@@ -1,40 +1,64 @@
 services:
-  plantuml-c4model:
+  fc3-microservices-plantuml-c4model:
     container_name: plantuml-c4model
     image: plantuml/plantuml-server
     ports:
       - "8081:8080"
     networks:
       - microservices-net
-  goapp-wallet-core:
-    container_name: goapp-wallet-core
-    build: 
-      # context: .
-      dockerfile: ../walletcore/docker/Dockerfile.dev
+  fc3-microservices-goapp-walletcore:
+    container_name: fc3-microservices-goapp-walletcore
+    build:
+      context: .
+      dockerfile: services/walletcore/docker/Dockerfile.dev
     volumes:
-      - ../:/workspace
+      - ./services/walletcore:/workspace
     working_dir: /workspace
     ports:
       - "8080:8080"
     networks:
       - microservices-net
-  mysql:
+  fc3-microservices-balance-nodejs:
+    container_name: fc3-microservices-balance-nodejs
+    build:
+      context: .
+      dockerfile: services/balance/docker/Dockerfile.dev
+    volumes:
+      - ./services/balance:/workspace
+    working_dir: /workspace
+    ports:
+      - "3003:3003"
+    networks:
+      - microservices-net
+  fc3-microservices-mysql:
     image: mysql:5.7
     platform: linux/amd64
     environment:
-      MYSQL_ROOT_PASSWORD: root
       MYSQL_DATABASE: wallet
+      MYSQL_ROOT_PASSWORD: root
       MYSQL_PASSWORD: root
     ports:
       - 3306:3306
     volumes:
-      - ./mysql:/var/lib/mysql
+      - ./.docker/mysql:/var/lib/mysql
     networks:
       - microservices-net
-  zookeeper:
+  fc3-microservices-postgresql:
+    image: postgres:15
+    environment:
+      POSTGRES_DB: balance
+      POSTGRES_USER: root
+      POSTGRES_PASSWORD: root
+    ports:
+      - 5432:5432
+    volumes:
+      - ./.docker/postgresql:/var/lib/postgresql/data
+    networks:
+      - microservices-net
+  fc3-microservices-zookeeper:
     # orquestração e descoberta de serviços
     image: "confluentinc/cp-zookeeper:6.1.0"
-    container_name: zookeeper
+    container_name: fc3-microservices-zookeeper
     ports:
       - 2181:2181
     environment:
@@ -43,11 +67,11 @@ services:
       ZOOKEEPER_TICK_TIME: 2000
     networks:
       - microservices-net
-  kafka:
+  fc3-microservices-kafka:
     image: "confluentinc/cp-enterprise-kafka:6.1.0"
-    container_name: kafka
+    container_name: fc3-microservices-kafka
     depends_on:
-      - zookeeper
+      - fc3-microservices-zookeeper
     ports:
     # Exposes 9092 for external connections to the broker
     # Use kafka:29092 for connections internal on the docker network
@@ -56,10 +80,10 @@ services:
     environment:
       TZ: Sao_Paulo/Brazil
       KAFKA_BROKER_ID: 1
-      KAFKA_ZOOKEEPER_CONNECT: zookeeper:2181
+      KAFKA_ZOOKEEPER_CONNECT: fc3-microservices-zookeeper:2181
       KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: PLAINTEXT:PLAINTEXT,PLAINTEXT_HOST:PLAINTEXT
       KAFKA_INTER_BROKER_LISTENER_NAME: PLAINTEXT
-      KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://kafka:29092,PLAINTEXT_HOST://localhost:9092
+      KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://fc3-microservices-kafka:29092,PLAINTEXT_HOST://localhost:9092
       KAFKA_AUTO_CREATE_TOPICS_ENABLE: "true"
       KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
       KAFKA_TRANSACTION_STATE_LOG_REPLICATION_FACTOR: 1
@@ -68,16 +92,15 @@ services:
       CONFLUENT_METRICS_ENABLE: 'false'
     networks:
       - microservices-net
-  control-center:
+  fc3-microservices-control-center:
     image: confluentinc/cp-enterprise-control-center:7.3.0
-    hostname: control-center
-    container_name: control-center
+    container_name: fc3-microservices-control-center
     depends_on:
-      - kafka
+      - fc3-microservices-kafka
     ports:
-      - "9021:9021"
+      - "9022:9021"
     environment:
-      CONTROL_CENTER_BOOTSTRAP_SERVERS: 'kafka:29092'
+      CONTROL_CENTER_BOOTSTRAP_SERVERS: 'fc3-microservices-kafka:29092'
       CONTROL_CENTER_REPLICATION_FACTOR: 1
       CONTROL_CENTER_INTERNAL_TOPICS_PARTITIONS: 1
       CONTROL_CENTER_MONITORING_INTERCEPTOR_TOPIC_PARTITIONS: 1
