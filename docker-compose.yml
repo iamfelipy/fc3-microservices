@@ -12,7 +12,7 @@ services:
       context: .
       dockerfile: services/walletcore/docker/Dockerfile.dev
     volumes:
-      - ./services/walletcore:/workspace
+      - ${HOST_PROJECT_PATH}/services/walletcore:/workspace
     working_dir: /workspace
     ports:
       - "8080:8080"
@@ -24,7 +24,7 @@ services:
       context: .
       dockerfile: services/balance/docker/Dockerfile.dev
     volumes:
-      - ./services/balance:/workspace
+      - ${HOST_PROJECT_PATH}/services/balance:/workspace
     working_dir: /workspace
     ports:
       - "3003:3003"
@@ -40,7 +40,7 @@ services:
     ports:
       - 3306:3306
     volumes:
-      - ./.docker/mysql:/var/lib/mysql
+      - ${HOST_PROJECT_PATH}/.docker/mysql:/var/lib/mysql
     networks:
       - microservices-net
   fc3-microservices-postgresql:
@@ -52,7 +52,7 @@ services:
     ports:
       - 5432:5432
     volumes:
-      - ./.docker/postgresql:/var/lib/postgresql/data
+      - ${HOST_PROJECT_PATH}/.docker/postgresql:/var/lib/postgresql/data
     networks:
       - microservices-net
   fc3-microservices-zookeeper:
