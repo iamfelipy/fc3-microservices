@@ -1,0 +1,18 @@
+{
+	"name": "Walletcore (Go)",
+
+	"dockerComposeFile": "../../../docker-compose.yml",
+	"service": "fc3-microservices-goapp-walletcore",
+	"workspaceFolder": "/workspace",
+
+	"shutdownAction": "none",
+
+	"customizations": {
+		"vscode": {
+			"extensions": [
+				"golang.go",
+				"humao.rest-client"
+			]
+		}
+	}
+}

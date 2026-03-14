@@ -1,0 +1,20 @@
+{
+	"name": "Balance (Node)",
+
+	"dockerComposeFile": "../../../docker-compose.yml",
+	"service": "fc3-microservices-balance-nodejs",
+	"workspaceFolder": "/workspace",
+
+	"shutdownAction": "none",
+
+	"customizations": {
+		"vscode": {
+			"extensions": [
+				"humao.rest-client",
+				"esbenp.prettier-vscode",
+				"Prisma.prisma",
+				"dbaeumer.vscode-eslint"
+			]
+		}
+	}
+}

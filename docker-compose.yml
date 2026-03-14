@@ -10,26 +10,29 @@ services:
     container_name: fc3-microservices-goapp-walletcore
     build:
       context: .
-      dockerfile: services/walletcore/docker/Dockerfile.dev
+      dockerfile: ./services/walletcore/docker/Dockerfile.dev
     volumes:
-      - ${HOST_PROJECT_PATH}/services/walletcore:/workspace
+      - ./services/walletcore:/workspace
     working_dir: /workspace
     ports:
       - "8080:8080"
     networks:
       - microservices-net
+    command: go run cmd/walletcore/main.go
   fc3-microservices-balance-nodejs:
     container_name: fc3-microservices-balance-nodejs
     build:
       context: .
-      dockerfile: services/balance/docker/Dockerfile.dev
+      dockerfile: ./services/balance/docker/Dockerfile.dev
     volumes:
-      - ${HOST_PROJECT_PATH}/services/balance:/workspace
+      - ./services/balance:/workspace
     working_dir: /workspace
     ports:
       - "3003:3003"
     networks:
       - microservices-net
+    command: >
+      sh -c "npm i && npx tsx src/modules/balance/infra/repository/prisma/seed.ts && npm run start:dev"
   fc3-microservices-mysql:
     image: mysql:5.7
     platform: linux/amd64
@@ -40,7 +43,7 @@ services:
     ports:
       - 3306:3306
     volumes:
-      - ${HOST_PROJECT_PATH}/.docker/mysql:/var/lib/mysql
+      - ./.docker/mysql:/var/lib/mysql
     networks:
       - microservices-net
   fc3-microservices-postgresql:
@@ -52,7 +55,7 @@ services:
     ports:
       - 5432:5432
     volumes:
-      - ${HOST_PROJECT_PATH}/.docker/postgresql:/var/lib/postgresql/data
+      - ./.docker/postgresql:/var/lib/postgresql/data
     networks:
       - microservices-net
   fc3-microservices-zookeeper:
@@ -110,4 +113,5 @@ services:
       - microservices-net
 networks:
   microservices-net:
+    name: microservices-net
     driver: bridge
