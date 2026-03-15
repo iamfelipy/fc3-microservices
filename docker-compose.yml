@@ -21,7 +21,9 @@ services:
     depends_on:
       - fc3-microservices-mysql
     command: >
-      sh -c "go run seed/seed.go && go run cmd/walletcore/main.go"
+      sh -c "dockerize -wait tcp://fc3-microservices-mysql:3306 -timeout 60s
+      && go run seed/seed.go
+      && go run cmd/walletcore/main.go"
   fc3-microservices-balance-nodejs:
     container_name: fc3-microservices-balance-nodejs
     build:
@@ -37,10 +39,12 @@ services:
     depends_on:
       - fc3-microservices-postgresql
     command: >
-      sh -c "npm i && \
-      npx prisma db push --schema ./src/modules/balance/infra/repository/prisma/schema.prisma && \
-      npx tsx src/modules/balance/infra/repository/prisma/seed.ts && \
-      npm run start:dev"
+      sh -c "dockerize -wait tcp://fc3-microservices-postgresql:5432 -timeout 60s \
+      && cp -n .env.example .env || true \
+      && npm i \
+      && npx prisma db push --schema ./src/modules/balance/infra/repository/prisma/schema.prisma \
+      && npx tsx src/modules/balance/infra/repository/prisma/seed.ts \
+      && npm run start:dev"
   fc3-microservices-mysql:
     image: mysql:5.7
     platform: linux/amd64
