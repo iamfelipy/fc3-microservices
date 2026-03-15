@@ -14,3 +14,9 @@ Operação que diminui o saldo de uma Account.
 
 ## Transaction
 Movimentação financeira entre duas Accounts.
+
+## Statement
+Extratos do cliente, histórico detalhado das transações e movimentações da conta digital do usuário. Isso é útil para consultar saldos, extratos mensais ou detalhar transações realizadas.
+
+## Balance
+O saldo atual do cliente.
