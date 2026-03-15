@@ -18,7 +18,10 @@ services:
       - "8080:8080"
     networks:
       - microservices-net
-    command: go run cmd/walletcore/main.go
+    depends_on:
+      - fc3-microservices-mysql
+    command: >
+      sh -c "go run seed/seed.go && go run cmd/walletcore/main.go"
   fc3-microservices-balance-nodejs:
     container_name: fc3-microservices-balance-nodejs
     build:
@@ -31,8 +34,13 @@ services:
       - "3003:3003"
     networks:
       - microservices-net
+    depends_on:
+      - fc3-microservices-postgresql
     command: >
-      sh -c "npm i && npx tsx src/modules/balance/infra/repository/prisma/seed.ts && npm run start:dev"
+      sh -c "npm i && \
+      npx prisma db push --schema ./src/modules/balance/infra/repository/prisma/schema.prisma && \
+      npx tsx src/modules/balance/infra/repository/prisma/seed.ts && \
+      npm run start:dev"
   fc3-microservices-mysql:
     image: mysql:5.7
     platform: linux/amd64
