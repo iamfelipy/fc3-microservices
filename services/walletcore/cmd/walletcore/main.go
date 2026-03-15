@@ -24,7 +24,7 @@ import (
 )
 
 func main() {
-	db, err := sql.Open("mysql", fmt.Sprintf("%s:%s@tcp(%s:%s)/%s?charset=utf8&parseTime=True&loc=Local", "root", "root", "mysql", "3306", "wallet"))
+	db, err := sql.Open("mysql", fmt.Sprintf("%s:%s@tcp(%s:%s)/%s?charset=utf8&parseTime=True&loc=Local", "root", "root", "fc3-microservices-mysql", "3306", "wallet"))
 	if err != nil {
 		panic(err)
 	}
@@ -46,7 +46,7 @@ func main() {
 
 	configMap := ckafka.ConfigMap{
 		//  lista inicial de brokers para conectar o cliente ao cluster.
-		"bootstrap.servers": "kafka:29092",
+		"bootstrap.servers": "fc3-microservices-kafka:29092",
 		// so deve ser passada para consumidores
 		// identifica o grupo de consumidores Kafka, útil para gerenciamento de consumidores e balanceamento de mensagens.
 		"group.id": "wallet",
